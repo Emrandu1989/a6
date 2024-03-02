@@ -45,7 +45,9 @@ const displayPost = (posts) =>{
                   </div>
                </div>
                <div>
-                <i class="fa-solid fa-envelope"></i>
+                  <button onclick="passDataByButtonClick('${post.id}')">
+                  <i class="fa-solid fa-envelope"></i>
+                  </button>
                </div>
               </div>
           </div>
@@ -57,8 +59,41 @@ const displayPost = (posts) =>{
         
         `
         leftSideTextContainer.appendChild(leftSideDiv);
+        
+        
       
 
       })
-}
-loadData();
+      
+      
+
+    }
+
+   let count = 0;
+   
+
+    const passDataByButtonClick = async(id) =>{
+         count++;
+         const clickCount = document.getElementById('count');
+         clickCount.innerText = count;
+         
+         const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/post/${id}`)
+         const data = await res.json();
+         console.log(data.title)
+
+        const passDataContainer = document.getElementById('right-data-container');
+           const  rightDataDiv = document.createElement('div');
+           rightDataDiv.classList.add("flex")
+             rightDataDiv.innerHTML = `
+                    <h2 class="mt-2 pl-2 text-lg">${data.title}</h2>
+                     <div class="flex mt-2 pl-2 justify-center items-center">
+                     <i class="fa-regular ml-4 mr-4 fa-eye"></i>
+                     <p>${data.view_count}</p> 
+                     </div>
+    
+             `
+             passDataContainer.appendChild(rightDataDiv);
+    }
+
+
+loadData()
