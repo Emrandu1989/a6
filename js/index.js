@@ -9,7 +9,7 @@ const loadData = async() =>{
 const displayPost = (posts) =>{
     const leftSideTextContainer = document.getElementById('left-data-container');
       posts.forEach(post=>{
-        console.log(post)
+        // console.log(post)
         const leftSideDiv = document.createElement('div');
         
         leftSideDiv.innerHTML = `
@@ -95,5 +95,54 @@ const displayPost = (posts) =>{
              passDataContainer.appendChild(rightDataDiv);
     }
 
+
+    const loadLatestPostData = async() =>{
+        const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/latest-posts');
+        const data = await res.json();
+        // console.log(data);
+        displayLatestPostData(data)
+    }
+
+      const displayLatestPostData = (data) =>{
+        const latestPostCardContainer = document.getElementById('card-container');
+          data.forEach(latestPost =>{
+            console.log(latestPost);
+            
+            const cardData = document.createElement('div');
+              cardData.innerHTML = `
+              
+              <div class="card w-96 bg-base-100 shadow-xl">
+              <figure><img src="${latestPost.cover_image}" alt="Shoes" /></figure>
+              <div class="flex items-center ml-2 gap-3 mt-2 ">
+              <i class="fa-regular fa-calendar-days"></i>
+               <p>${latestPost.author.posted_date || "No date found"}</p>
+              </div>
+              <div class="card-body">
+                <h2 class="card-title">
+                  ${latestPost.title}
+                  
+                </h2>
+                <p>${latestPost.description}</p>
+                <div class="card-actions justify-start">
+                  
+                  <img  class='w-[50px] rounded-full' src="${latestPost.profile_image}" alt="">
+                  
+                  <div >
+                    <h3 class="mr-5">${latestPost.author.name}</h3>
+                    <h3>${latestPost.author.designation || "No Designation Found"}</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+              
+              `
+
+              latestPostCardContainer.appendChild(cardData);
+
+          })
+      }
+
+
+    loadLatestPostData()
 
 loadData()
