@@ -13,11 +13,11 @@ const displayPost = (posts) =>{
         const leftSideDiv = document.createElement('div');
         
         leftSideDiv.innerHTML = `
-        <div class="flex mt-5 rounded-xl bg-gray-200 px-24  h-[300px] justify-between items-center">
-        <div class="">
-          <img  class='w-[200px] rounded-full' src="${post.image}" alt="">
+        <div class="flex flex-col lg:flex-row mt-5 rounded-xl bg-gray-200   px-12 lg:px-24  h-[400px] lg:h-[300px] justify-between items-center">
+        <div class="pt-9">
+          <img  class=' w-[120px]  lg:w-[200px] rounded-full' src="${post.image}" alt="">
          </div>
-         <div class="">
+         <div class="mb-5">
           <div class="flex justify-between items-center">
             <div>
               <div class="flex gap-5 mb-2">
@@ -25,11 +25,11 @@ const displayPost = (posts) =>{
                  <h2>Author: ${post.author.name}</h2>
               </div>
                 <div class="mb-4">
-                  <h2 class="text-2xl mb-2">${post.title}</h2>
+                  <h2 class="text-lg lg:text-2xl mb-2">${post.title}</h2>
                   <p>${post.description} </p>
                 </div>
               <hr>
-              <div class="flex justify-between mt-4">
+              <div class="flex justify-between mt-4 mb-5">
                 <div class="flex space-x-8 ">
                   <div class="flex justify-center items-center">
                     <i class="fa-solid fa-envelope-open-text mr-4"></i>
@@ -44,7 +44,7 @@ const displayPost = (posts) =>{
                     <p>${post.posted_time}</p>
                   </div>
                </div>
-               <div>
+               <div class="ml-16 ">
                   <button onclick="passDataByButtonClick('${post.id}')">
                   <i class="fa-solid fa-envelope"></i>
                   </button>
