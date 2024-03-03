@@ -1,9 +1,11 @@
 const loadData = async() =>{
+  handelLoader(true)
     const res = await fetch('https://openapi.programming-hero.com/api/retro-forum/posts');
     const data = await res.json();
     // console.log(data.posts)
     const posts = data.posts;
     displayPost(posts)
+    handelLoader(false)
 }
 
 const displayPost = (posts) =>{
@@ -14,13 +16,14 @@ const displayPost = (posts) =>{
           console.log(post)
          
         const leftSideDiv = document.createElement('div');
-        
+        const conditionalStatus = document.getElementById("conditional-status")
+  const colorStatus = post.isActive ? "bg-green-500":"bg-red-500"
         leftSideDiv.innerHTML = `
         <div class="flex flex-col lg:flex-row mt-5 rounded-xl bg-gray-200   px-12 lg:px-24  h-[400px] lg:h-[300px] justify-between items-center">
         <div class="pt-9 relative">
           <img  class=' w-[120px]  lg:w-[200px] rounded-full' src="${post.image}" alt="">
           
-          <div id="conditional-color" class="w-[15px] h-[15px] absolute top-12 right-5 rounded-full bg-green-500">
+          <div id="conditional-status" class="w-[15px] h-[15px] absolute top-12 right-5 rounded-full ${colorStatus}">
                <p>.</p>
           </div>
          </div>
@@ -149,12 +152,45 @@ const displayPost = (posts) =>{
           })
       }
 
-      const handleSearch= () =>{
-        const inputField = document.getElementById('input-field');
-        const inputFieldText= inputField.value;
-        console.log(inputFieldText)
+
+      const loadDataById = async(id) =>{
+          const res = await fetch(`https://openapi.programming-hero.com/api/retro-forum/post/${id}`);
+          const data = await res.json();
+          console.log(data)
       }
 
+      const handleSearch= () =>{
+        handelLoader(true)
+        const inputField = document.getElementById('input-field');
+        const inputFieldText= inputField.value;
+        
+        if(inputFieldText){
+               loadDataById(inputFieldText)
+        }else{
+          alert('Please enter a valid category')
+        }
+handelLoader(false)
+
+      }
+
+
+
+
+
+      const handelLoader = (isLoading) => {
+        const loadingSpin = document.getElementById("lodingSpin");
+        const main = document.getElementById("main");
+    
+        if (isLoading === true) {
+            loadingSpin.classList.remove("hidden");
+            main.classList.add("hidden");
+        } else {
+            setTimeout(() => {
+                loadingSpin.classList.add("hidden");
+                main.classList.remove("hidden");
+            }, 2000);
+        }
+    }
 
     loadLatestPostData()
 
