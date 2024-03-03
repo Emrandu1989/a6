@@ -24,7 +24,7 @@ const displayPost = (posts) => {
         <div class="pt-9 relative">
           <img  class=' w-[120px]  lg:w-[200px] rounded-full' src="${post.image}" alt="">
           
-          <div id="conditional-status" class="w-[15px] h-[15px] absolute top-12 right-5 rounded-full ${colorStatus}">
+          <div id="conditional-status" class="w-[15px] h-[15px] absolute top-8 right-5 lg:top-12 right-5 rounded-full ${colorStatus}">
                <p>.</p>
           </div>
          </div>
