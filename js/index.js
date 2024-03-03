@@ -8,14 +8,21 @@ const loadData = async() =>{
 
 const displayPost = (posts) =>{
     const leftSideTextContainer = document.getElementById('left-data-container');
+    const conditionalColor = document.getElementById('conditional-color');
+   
       posts.forEach(post=>{
-        // console.log(post)
+          console.log(post)
+         
         const leftSideDiv = document.createElement('div');
         
         leftSideDiv.innerHTML = `
         <div class="flex flex-col lg:flex-row mt-5 rounded-xl bg-gray-200   px-12 lg:px-24  h-[400px] lg:h-[300px] justify-between items-center">
-        <div class="pt-9">
+        <div class="pt-9 relative">
           <img  class=' w-[120px]  lg:w-[200px] rounded-full' src="${post.image}" alt="">
+          
+          <div id="conditional-color" class="w-[15px] h-[15px] absolute top-12 right-5 rounded-full bg-green-500">
+               <p>.</p>
+          </div>
          </div>
          <div class="mb-5">
           <div class="flex justify-between items-center">
@@ -46,7 +53,7 @@ const displayPost = (posts) =>{
                </div>
                <div class="ml-16 ">
                   <button onclick="passDataByButtonClick('${post.id}')">
-                  <i class="fa-solid fa-envelope"></i>
+                  <i class="fa-solid text-2xl rounded-full fa-envelope"></i>
                   </button>
                </div>
               </div>
@@ -106,7 +113,7 @@ const displayPost = (posts) =>{
       const displayLatestPostData = (data) =>{
         const latestPostCardContainer = document.getElementById('card-container');
           data.forEach(latestPost =>{
-            console.log(latestPost);
+            // console.log(latestPost);
             
             const cardData = document.createElement('div');
               cardData.innerHTML = `
@@ -115,7 +122,7 @@ const displayPost = (posts) =>{
               <figure><img src="${latestPost.cover_image}" alt="Shoes" /></figure>
               <div class="flex items-center ml-2 gap-3 mt-2 ">
               <i class="fa-regular fa-calendar-days"></i>
-               <p>${latestPost.author.posted_date || "No date found"}</p>
+               <p>${latestPost.author.posted_date || "No Publish Date"}</p>
               </div>
               <div class="card-body">
                 <h2 class="card-title">
@@ -129,7 +136,7 @@ const displayPost = (posts) =>{
                   
                   <div >
                     <h3 class="mr-5">${latestPost.author.name}</h3>
-                    <h3>${latestPost.author.designation || "No Designation Found"}</h3>
+                    <h3>${latestPost.author.designation || "Unknown"}</h3>
                   </div>
                 </div>
               </div>
@@ -140,6 +147,12 @@ const displayPost = (posts) =>{
               latestPostCardContainer.appendChild(cardData);
 
           })
+      }
+
+      const handleSearch= () =>{
+        const inputField = document.getElementById('input-field');
+        const inputFieldText= inputField.value;
+        console.log(inputFieldText)
       }
 
 
