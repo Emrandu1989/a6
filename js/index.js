@@ -94,13 +94,15 @@ const passDataByButtonClick = async (id) => {
 
   const passDataContainer = document.getElementById('right-data-container');
   const rightDataDiv = document.createElement('div');
-  rightDataDiv.classList.add("flex")
+  
   rightDataDiv.innerHTML = `
-                    <h2 class="mt-2 pl-2 text-lg">${data.title}</h2>
-                     <div class="flex mt-2 pl-2 justify-center items-center">
-                     <i class="fa-regular ml-4 mr-4 fa-eye"></i>
-                     <p>${data.view_count}</p> 
-                     </div>
+                  <div class="flex justify-center mb-2 items-center bg-base-200 p-2 py-5 h-[40px]">
+                  <h2 class="mt-2 pl-2 text-lg">${data.title}</h2>
+                  <div class="flex mt-2 pl-2 justify-center items-center">
+                  <i class="fa-regular ml-4 mr-4 fa-eye"></i>
+                  <p>${data.view_count}</p> 
+                  </div>
+                  </div>
     
              `
   passDataContainer.appendChild(rightDataDiv);
